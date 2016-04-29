@@ -50,6 +50,9 @@ Route::get('/group1',function(){
 Route::get('/test2',function(){
     return view('group1.test2');
 });
+Route::get('/student',function(){
+   return view('group1.student');
+});
 
 
 /*
