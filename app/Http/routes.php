@@ -33,6 +33,8 @@ Route::post('/create_order','CreateOrderController@store');
 Route::get('/add_product','ProductController@create');
 
 Route::resource('products','ProductController');
+//Student
+Route::resource('students','StudentController');
 Route::get('/about',function()
 {
     $name='<span style="color:green">Hlong</span>';

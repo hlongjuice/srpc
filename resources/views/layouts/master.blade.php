@@ -30,8 +30,19 @@
 	  {{--@include('layouts.navbar')--}}
 	  @yield('nav')
 	  <div class="container">
-	   @yield('content') {{-- Main Content--}}
-		  @yield('sidebar')
+		  <div class="row">
+			  {{--Main Content--}}
+			  <div class="col-md-8 col-md-push-4">
+				  @yield('content')
+			  </div>
+
+			  {{--Side Menu--}}
+			  <div class="col-md-4 col-md-pull-8">
+				  @yield('sidemenu')
+			  </div>
+
+		  </div>
+
 	  </div>
 
 	    @yield('page-script')
