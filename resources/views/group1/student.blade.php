@@ -1,33 +1,59 @@
 @extends('layouts.master')
+@section('nav')
+    @include('group1.navbar')
+    @endsection
+
+{{--MAin Content--}}
 @section('content')
-    <div class="col-md-12">
+    <div class="col-md-8 col-md-push-4">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>ข้อมูลนักศึกษา</h3>
             </div>
             <div class="panel-body">
+                {{--Student Form--}}
                 {{Form::open(array('class'=>'form-horizontal'))}}
-                <div class=" col-xs-12 col-md-5 form-inline">
-                    <div class="form-group col-xs-3">
-                        {{Form::label('man','ชาย',array('class'=>'col-xs-2 col-md-4'))}}
-                        <div class="col-xs-2 col-md-4">
-                            {{Form::radio('man','man',false)}}
+
+                    {{--Gender--}}
+                    <div class=" col-xs-12 col-md-3 form-group">
+                        <div class="col-xs-5">
+                            <label class="radio-inline"><input type="radio" name="gender" id="gender" value="man">ชาย</label>
                         </div>
-                    </div>
-                    <div class="form-group col-xs-3">
-                        {{Form::label('man','หญิง',array('class'=>'col-xs-2 col-md-2'))}}
-                        <div class="col-xs-2 col-md-2">
-                            {{Form::radio('man','man',false)}}
+                        <div class="col-xs-5">
+                            <label class="radio-inline"><input type="radio" name="gender" id="gender" value="woman">หญิง</label>
                         </div>
                     </div>
 
-                </div>
+                    {{--Name--}}
+                    <div class="col-xs-12 col-md-5 form-group">
+                      {{Form::label('name','ชื่อ',array('class'=>'control-label col-xs-3'))}}
+                        <div class="col-xs-9">
+                            {{Form::text('name',null,array('class'=>'form-control','placeholder'=>'ชื่อ'))}}
+                        </div>
+                    </div>
+
+                    {{--LastName--}}
+                    <div class="col-xs-12 col-md-5 form-group">
+                        {{Form::label('lastname','นามสกุล',array('class'=>'control-label col-xs-3'))}}
+                        <div class="col-xs-9">
+                            {{Form::text('lastname',null,array('class'=>'form-control','placeholder'=>'นามสกุล'))}}
+                        </div>
+                    </div>
+
                 <div class="col-md-6">
 
 
                 </div>
-            </div>
                 {{Form::close()}}
+            </div>
+
         </div>
     </div>
 @endsection
+
+{{--SideMenu--}}
+@section('sidebar')
+    <div class="col-md-4 col-md-pull-8">
+        @include('group1.sidemenu')
+    </div>
+    @endsection
