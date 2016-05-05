@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class StudentController extends Controller
+class EmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
-        return view('coop_division.students.index')->with('students',$students);
+        //
     }
 
     /**
@@ -27,7 +25,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('coop_division.students.add_student');
+        //
     }
 
     /**
@@ -38,9 +36,7 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $students=$request->all();
-        Student::create($students);
-        return redirect('students');
+        //
     }
 
     /**
@@ -62,8 +58,7 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $student=Student::findOrNew($id);
-        return view('coop_division.students.edit')->with('student',$student);
+        //
     }
 
     /**
@@ -86,8 +81,6 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        Student::destroy($id);
-       return redirect('students');
         //
     }
 }

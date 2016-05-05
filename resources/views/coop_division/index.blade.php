@@ -1,11 +1,11 @@
 @extends('layouts.master')
 @section('nav')
-    @include('group1.navbar')
+    @include('coop_division.navbar')
     @endsection
 @section('content')
-        @include('group1.maincontent')
+        @include('coop_division.maincontent')
     @endsection
 
 @section('sidemenu')
-        @include('group1.sidemenu')
+        @include('coop_division.sidemenu')
     @endsection

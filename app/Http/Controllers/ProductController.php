@@ -95,6 +95,7 @@ class ProductController extends Controller
         Product::findOrNew($id)->fill($product)->save();
         return redirect('products');
 
+
     }
 
     /**

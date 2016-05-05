@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('nav')
-    @include('group1.navbar')
+    @include('coop_division.navbar')
     @endsection
 
 {{--MAin Content--}}
@@ -54,6 +54,6 @@
 {{--SideMenu--}}
 @section('sidebar')
     <div class="col-md-4 col-md-pull-8">
-        @include('group1.sidemenu')
+        @include('coop_division.sidemenu')
     </div>
     @endsection

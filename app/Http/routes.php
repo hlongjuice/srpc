@@ -46,14 +46,14 @@ Route::get('/about',function()
 Route::get('/order','CreateOrderController@index');
 Route::get('/order/{id}','CreateOrderController@show');
 
-Route::get('/group1',function(){
-   return view('group1.index');
+Route::get('/coop_division',function(){
+   return view('coop_division.index');
 });
 Route::get('/test2',function(){
-    return view('group1.test2');
+    return view('coop_division.test2');
 });
 Route::get('/student',function(){
-   return view('group1.student');
+   return view('coop_division.student');
 });
 
 

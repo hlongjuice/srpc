@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('nav')
-    @include('group1.navbar')
+    @include('coop_division.navbar')
     @endsection
 @section('content')
     <div class="panel panel-default">
@@ -33,5 +33,5 @@
     @endsection
 {{--Side Menu--}}
 @section('sidemenu')
-    @include('group1.sidemenu')
+    @include('coop_division.sidemenu')
     @endsection
