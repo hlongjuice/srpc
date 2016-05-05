@@ -25,7 +25,7 @@
                     <td>{{$personnel->name }}</td>
                     <td>{{$personnel->lastname}}</td>
                     <td>{{$personnel->rank}}</td>
-                    <td>{{$personnel->}}</td>
+                    <td>{{$personnel->division}}</td>
                     <td>{{$personnel->grade}}</td>
                     {{--Check Image File--}}
                     @if(!empty($personnel->image))

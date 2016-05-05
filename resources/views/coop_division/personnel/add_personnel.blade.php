@@ -7,12 +7,12 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3>ข้อมูลนักศึกษา</h3>
+            <h3>เพิ่มบุคคลากร</h3>
         </div>
         <div class="panel-body">
             {{--Student Form--}}
             {{Form::open(array('route'=>'personnel.store'))}}
-            
+
             {{--Gender--}}
             <div class="col-xs-12 col-md-4 form-group">
                 {{Form::label('gender','เพศ')}}
@@ -40,14 +40,14 @@
 
             {{--Level--}}
             <div class="col-xs-6 col-md-4 form-group">
-                {{Form::label('level','ชั้นปี')}}
+                {{Form::label('rank','ตำแหน่ง')}}
                     {{Form::text('level',null,array('class'=>'form-control','placeholder'=>'1-3'))}}
             </div>
 
             {{--Grade--}}
             <div class="col-xs-6 col-md-4 form-group">
-                {{Form::label('grade','เกรดเฉลี่ย')}}
-                    {{Form::text('grade',null,array('class'=>'form-control','placeholder'=>'x.xx'))}}
+                {{Form::label('','หน้าที่รับผิดชอบ')}}
+                {{Form::select('division',$division,null,array('class'=>'form-control'))}}
             </div>
 
             {{--Phone--}}

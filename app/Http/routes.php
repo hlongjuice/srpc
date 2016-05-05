@@ -32,6 +32,7 @@ Route::post('/create_order','CreateOrderController@store');
 //});
 Route::get('/add_product','ProductController@create');
 
+Route::resource('personnel','PersonnelController');
 Route::resource('products','ProductController');
 //Student
 Route::resource('students','StudentController');
