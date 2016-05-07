@@ -6,7 +6,7 @@ use App\Models\Division;
 use App\Models\DivisionPersonnel;
 use App\Models\Personnel;
 use Illuminate\Http\Request;
-
+use DB;
 use App\Http\Requests;
 
 class PersonnelController extends Controller
@@ -22,10 +22,16 @@ class PersonnelController extends Controller
 //            $query->select('division_id');
 //        }])->get()->toArray();//            $personnels=new Personnel();
 //        $personnels->division();
-        $personnels=Personnel::with('division')->get();
+        $personnel=Personnel::all();
 //        $personnels=Personnel::find(8)->division->toArray();
 //        $personnels->division;
-        print_r($personnels->division);
+        foreach($personnel as $person){
+            echo $person->divisions;
+        }
+//        foreach($personnels->divisions as $person){
+//            echo $person;
+//        }
+//        print_r($personnels->division);
 //        return view('coop_division.personnel.index')->with('personnels',$personnels);
     }
 
@@ -36,13 +42,15 @@ class PersonnelController extends Controller
      */
     public function create()
     {
-        $divisions=Division::all('title')->toArray();
-        $division=array_map('current',$divisions);
-//        array_shift($division:$d
-//        array_shift($division);
-//        print_r($division);
-        unset($division[0]);
-       return view('coop_division.personnel.add_personnel')->with('division',$division);
+        $divisions=Division::all('id','title');
+//   Set Associative Array Before Send To Form
+        foreach($divisions as $division){
+//     $arr_division["KEY"]="Values"
+            $arr_division[$division->id]=$division->title;
+        }
+//    Delete first element from division
+        unset($arr_division[1]);
+        return view('coop_division.personnel.add_personnel')->with('division',$arr_division);
     }
 
     /**
@@ -62,8 +70,9 @@ class PersonnelController extends Controller
         $person_duty->personnel_id=$person->id;
         $person_duty->division_id=$request->get('division');
         $person_duty->save();
-
-        return redirect('personnel');
+//        $division=Division::find($request->get('division'));
+//        $division->personnel()->attach()
+        return redirect()->back();;
 
     }
 
