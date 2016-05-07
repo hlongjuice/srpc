@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Division;
+use App\Models\DivisionPersonnel;
 use App\Models\Personnel;
 use Illuminate\Http\Request;
 
@@ -17,8 +18,15 @@ class PersonnelController extends Controller
      */
     public function index()
     {
-        $personnels=Personnel::all();
-        return view('coop_division.personnel.index')->with('personnels',$personnels);
+//        $personnels=Personnel::with(['division'=>function($query){
+//            $query->select('division_id');
+//        }])->get()->toArray();//            $personnels=new Personnel();
+//        $personnels->division();
+        $personnels=Personnel::with('division')->get();
+//        $personnels=Personnel::find(8)->division->toArray();
+//        $personnels->division;
+        print_r($personnels->division);
+//        return view('coop_division.personnel.index')->with('personnels',$personnels);
     }
 
     /**
@@ -31,9 +39,10 @@ class PersonnelController extends Controller
         $divisions=Division::all('title')->toArray();
         $division=array_map('current',$divisions);
 //        array_shift($division:$d
-        $div=array_shift($division);
-        print_r($div);
-//       return view('coop_division.personnel.add_personnel')->with('division',$division);
+//        array_shift($division);
+//        print_r($division);
+        unset($division[0]);
+       return view('coop_division.personnel.add_personnel')->with('division',$division);
     }
 
     /**
@@ -44,7 +53,18 @@ class PersonnelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $person =new Personnel();
+        $person->name=$request->get('name');
+        $person->lastname=$request->get('lastname');
+        $person->save();
+
+        $person_duty=new DivisionPersonnel();
+        $person_duty->personnel_id=$person->id;
+        $person_duty->division_id=$request->get('division');
+        $person_duty->save();
+
+        return redirect('personnel');
+
     }
 
     /**
