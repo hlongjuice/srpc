@@ -32,12 +32,12 @@
 	  <div class="container">
 		  <div class="row">
 			  {{--Main Content--}}
-			  <div class="col-md-8 col-md-push-4">
+			  <div class="col-md-9 col-md-push-3">
 				  @yield('content')
 			  </div>
 
 			  {{--Side Menu--}}
-			  <div class="col-md-4 col-md-pull-8">
+			  <div class="col-md-3 col-md-pull-9">
 				  @yield('sidemenu')
 			  </div>
 

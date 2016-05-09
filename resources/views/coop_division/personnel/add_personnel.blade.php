@@ -11,16 +11,16 @@
         </div>
         <div class="panel-body">
             {{--Student Form--}}
-            {{Form::open(array('route'=>'personnel.store'))}}
+            {{Form::open(array('route'=>'personnel.store','files'=>true))}}
 
             {{--Gender--}}
             <div class="col-xs-12 col-md-4 form-group">
                 {{Form::label('gender','เพศ')}}
                 <div class="form-group">
-                    <div class="col-xs-5">
+                    <div class="col-xs-6">
                         <label class="radio-inline"><input type="radio" name="gender" id="gender" value="ชาย">ชาย</label>
                     </div>
-                    <div class="col-xs-5">
+                    <div class="col-xs-6">
                         <label class="radio-inline"><input type="radio" name="gender" id="gender" value="หญิง">หญิง</label>
                     </div>
                 </div>
@@ -44,33 +44,49 @@
                     {{Form::text('level',null,array('class'=>'form-control','placeholder'=>'1-3'))}}
             </div>
 
-            {{--Grade--}}
-            <div class="col-xs-6 col-md-4 form-group">
-                {{Form::label('','หน้าที่รับผิดชอบ')}}
-                {{Form::select('division',$division,null,array('class'=>'form-control'))}}
+            {{--Duty--}}
+            <div class="col-xs-12 col-md-4 form-group">
+                {{Form::label('duty','หน้าที่รับชอบ')}}
+                <div class="form-group">
+                    <div class="col-xs-6 col-md-6">
+                        <label class="radio-inline"><input type="radio" name="duty" id="duty" value="1">หัวหน้า</label>
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <label class="radio-inline"><input type="radio" name="duty" id="duty" value="2">เจ้าหน้าที่</label>
+                    </div>
+                </div>
             </div>
 
-            {{--Phone--}}
+            {{--Division--}}
             <div class="col-xs-6 col-md-4 form-group">
-                {{Form::label('phone','เบอร์โทร')}}
-                    {{Form::text('phone',null,array('class'=>'form-control','placeholder'=>'0x-xxxxxxx'))}}
+                {{Form::label('division',' แผนก')}}
+                {{Form::select('division',$division,null,array('class'=>'form-control'))}}
             </div>
 
             {{--Address--}}
             <div class="col-xs-12 col-md-8 form-group">
                 {{Form::label('address','ที่อยู่')}}
-                {{Form::textarea('address',null,array('class'=>'form-control','row'=>'7'))}}
+                {{Form::textarea('address',null,array('class'=>'form-control','rows'=>'10'))}}
             </div>
 
-            {{--Image--}}
-            <div class="col-xs-6 col-md-4 form-group">
-                {{Form::label('image','รูป')}}
-                {{Form::file('image')}}
-            </div>
-
-            {{--Submit--}}
             <div class="col-xs-12 col-md-4 form-group">
-              {{Form::submit('บันทึก',array('class'=>'btn btn-success btn-block'))}}
+                {{--Level--}}
+                <div class="form-group">
+                    {{Form::label('phone','เบอร์โทร')}}
+                    {{Form::text('phone',null,array('class'=>'form-control','placeholder'=>'0x-xxxxxxx'))}}
+                </div>
+
+                {{--Image--}}
+                <div class="form-group">
+                    {{Form::label('image','รูป')}}
+                    {{Form::file('image')}}
+                </div>
+
+                {{--Submit--}}
+                <div class="form-group">
+                  {{Form::submit('บันทึก',array('class'=>'btn btn-success btn-block'))}}
+                </div>
+
             </div>
 
             {{Form::close()}}

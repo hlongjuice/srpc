@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Division;
-use App\Models\DivisionPersonnel;
+use App\Models\Duty;
 use App\Models\Personnel;
 use Illuminate\Http\Request;
-use DB;
+use Intervention\Image\Facades\Image;
 use App\Http\Requests;
 
 class PersonnelController extends Controller
@@ -18,81 +18,62 @@ class PersonnelController extends Controller
      */
     public function index()
     {
-//        $personnels=Personnel::with(['division'=>function($query){
-//            $query->select('division_id');
-//        }])->get()->toArray();//            $personnels=new Personnel();
-//        $personnels->division();
-        $personnel=Personnel::all();
-//        $personnels=Personnel::find(8)->division->toArray();
-//        $personnels->division;
-        foreach($personnel as $person){
-            echo $person->divisions;
+        //Get The Specific division
+        $division=Division::where('title','=','planA')->first();
+        foreach($division->personnel as $person)
+        {
+            echo $person;
+            echo $person->pivot->duty_id;
+            echo Duty::find($person->pivot->duty_id)->first()->title;
+            echo $person->name.'<br>';
+           // echo $person->personnel;
+//            echo $person->name;
+//            echo $person->duties()->wherePivot('division_id','=','2')->first()->title.'<br>';
         }
-//        foreach($personnels->divisions as $person){
-//            echo $person;
-//        }
-//        print_r($personnels->division);
-//        return view('coop_division.personnel.index')->with('personnels',$personnels);
+        //Send All personnel in the specific division
+       // return view('coop_division.personnel.index')->with('personnel',$division->personnel);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    /*Create Personnel*/
     public function create()
     {
-        $divisions=Division::all('id','title');
-//   Set Associative Array Before Send To Form
-        foreach($divisions as $division){
-//     $arr_division["KEY"]="Values"
-            $arr_division[$division->id]=$division->title;
+        $divisions=Division::all('id','title'); //Get all divisions
+
+        foreach($divisions as $division){ // Set Associative Array Before Send To Form
+            $arr_division[$division->id]=$division->title; // $arr_division["KEY"]="Values"
         }
-//    Delete first element from division
-        unset($arr_division[1]);
+        unset($arr_division[1]); // Delete first element from division
         return view('coop_division.personnel.add_personnel')->with('division',$arr_division);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    /*Add New Personnel*/
     public function store(Request $request)
     {
+        //Set input to personnel model
         $person =new Personnel();
         $person->name=$request->get('name');
         $person->lastname=$request->get('lastname');
+        //Upload image
+        $path='images/'.$request->file('image')->getClientOriginalName();//Get path and file name
+        Image::make($request->file('image')->getRealPath())->resize(200,200)->save($path);//Upload image to directory
+        $person->image=$path;//set image path
         $person->save();
 
-        $person_duty=new DivisionPersonnel();
-        $person_duty->personnel_id=$person->id;
-        $person_duty->division_id=$request->get('division');
-        $person_duty->save();
-//        $division=Division::find($request->get('division'));
-//        $division->personnel()->attach()
-        return redirect()->back();;
+        //Select Division from user's input
+        $division=Division::find($request->get('division'));
 
+        //Add New Personnel and set his/her division
+        $division->personnel()->attach($person->id,['duty_id'=>$request->get('duty')]);
+        return redirect('personnel');;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    /*Edit Personnel Profile*/
     public function edit($id)
     {
         //
