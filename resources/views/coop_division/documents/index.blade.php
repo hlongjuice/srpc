@@ -10,7 +10,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-4">
-                    <a class="btn btn-default" href={{route('coop_division.documents.add_new_file','2')}}>เพิ่มเอกสาร</a>
+                    <a class="btn btn-default" href={{route('coop_division.documents.create')}}>เพิ่มเอกสาร</a>
                 </div>
 
             </div>

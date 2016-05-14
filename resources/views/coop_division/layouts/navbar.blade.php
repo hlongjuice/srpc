@@ -11,7 +11,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#">ฝ่ายแผนงานและความร่วมมือ <span class="sr-only">(current)</span></a></li>
+                <li><a href={{url('coop_division')}}>ฝ่ายแผนงานและความร่วมมือ <span class="sr-only">(current)</span></a></li>
                 <li><a href="#">ฝ่ายพัฒนานักเรียนนักศึกษา</a></li>
                 <li><a href="#">ฝ่ายบริหารทรัพยากร</a></li>
                 <li><a href="#">ฝ่ายวิชาการ</a></li>

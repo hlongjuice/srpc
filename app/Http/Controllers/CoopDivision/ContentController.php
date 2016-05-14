@@ -2,31 +2,20 @@
 
 namespace App\Http\Controllers\CoopDivision;
 
-use App\Models\Document;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+
 use App\Http\Requests;
 
-class DocumentController extends Controller
+class ContentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function home($division){
-//        echo  $division;
-        $documents=Document::where('division_id',$division)->get();
-
-        return view('coop_division.documents.index')->with('documents',$documents);
-    }
-    public function index($division)
+    public function index()
     {
-        echo $division;
-
-//        $documents=Document::all();
-//        return view('coop_division.documents.index')->with('documents',$documents);
+        //
     }
 
     /**
@@ -34,14 +23,9 @@ class DocumentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function addNewFile($division){
-
-        return view('coop_division.documents.add_file')->with('division',$division);
-    }
     public function create()
     {
-
-        return view('coop_division.documents.add_file');
+        //
     }
 
     /**
@@ -52,15 +36,7 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
-        $document=new Document();
-        $file_name=$request->file('document')->getClientOriginalName();
-        $request->file('document')->move('documents',$file_name);
-        $file_path='documents/'.$file_name;
-        $document->file_path=$file_path;
-        $document->title=$request->get('title');
-        $document->division_id=$request->get('division');
-        $document->save();
-        return redirect()->route('coop_division.documents.home',[2]);
+        //
     }
 
     /**
