@@ -1,27 +1,35 @@
 @extends('layouts.master')
 @section('nav')
-    @include('coop_division.navbar')
+    @include('coop_division.layouts.navbar')
     @endsection
 @section('content')
     <div class="panel panel-default">
          <div class="panel-heading"><h4>บุคคลากร</h4></div>
         <div class="panel-body">
-            @foreach($personnel as $person)
-                <div class="col-xs-4">
-                    <div class="thumbnail">
-                    @if(!empty($person->image))
-                            <img src={{$person->image}}>
-                    @else
-                            <img class="thumbnail" src="http://placehold.it/200x200">
-                    @endif
-
-                        <div class="caption">
-                            <p>{{$person}}</p>
-
-                        </div>
-                    </div>
+            <div class="row" id="add-personnel-btn">
+                <div class="col-xs-6 col-md-4">
+                    <a class="btn btn-default" href={{route('coop_division.personnel.add_new_personnel')}}>เพิ่มบุคคลากร</a>
                 </div>
-            @endforeach
+            </div>
+            <div class="row">
+                @foreach($personnel as $person)
+
+                        <div class="col-xs-6 col-md-4">
+                            <div class="thumbnail">
+                            @if(!empty($person->image))
+                                    <img src={{$person->image}}>
+                            @else
+                                    <img class="img-responsive " style="width: 100%" src="http://placehold.it/200x200">
+                            @endif
+
+                                <div class="caption text-center">
+                                    <p>{{$person->name." ".$person->lastname}}</p>
+
+                                </div>
+                            </div>
+                        </div>
+                @endforeach
+            </div>
         </div>
     </div>
 
@@ -29,7 +37,7 @@
 
 {{--Side Menu--}}
 @section('sidemenu')
-    @include('coop_division.sidemenu')
+    @include('coop_division.layouts.sidemenu')
     @endsection
 {{--Script--}}
 @section('page-script')

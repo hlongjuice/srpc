@@ -1,17 +1,17 @@
 @extends('layouts.master')
 @section('nav')
-    @include('coop_division.navbar')
+    @include('coop_division.layouts.navbar')
 @endsection
 
 {{--MAin Content--}}
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3>เพิ่มบุคคลากร</h3>
+            <h4>เพิ่มบุคคลากร</h4>
         </div>
         <div class="panel-body">
             {{--Student Form--}}
-            {{Form::open(array('route'=>'personnel.store','files'=>true))}}
+            {{Form::open(array('route'=>'coop_division.personnel.store','files'=>true))}}
 
             {{--Gender--}}
             <div class="col-xs-12 col-md-4 form-group">
@@ -41,7 +41,7 @@
             {{--Level--}}
             <div class="col-xs-6 col-md-4 form-group">
                 {{Form::label('rank','ตำแหน่ง')}}
-                    {{Form::text('level',null,array('class'=>'form-control','placeholder'=>'1-3'))}}
+                    {{Form::text('level',null,array('class'=>'form-control','placeholder'=>''))}}
             </div>
 
             {{--Duty--}}
@@ -70,10 +70,10 @@
             </div>
 
             <div class="col-xs-12 col-md-4 form-group">
-                {{--Level--}}
+                {{--Phone--}}
                 <div class="form-group">
                     {{Form::label('phone','เบอร์โทร')}}
-                    {{Form::text('phone',null,array('class'=>'form-control','placeholder'=>'0x-xxxxxxx'))}}
+                    {{Form::text('phone',null,array('class'=>'form-control','placeholder'=>'ตัวอย่าง 081-2345678'))}}
                 </div>
 
                 {{--Image--}}
@@ -96,5 +96,5 @@
 
 {{--SideMenu--}}
 @section('sidemenu')
-        @include('coop_division.sidemenu')
+        @include('coop_division.layouts.sidemenu')
 @endsection

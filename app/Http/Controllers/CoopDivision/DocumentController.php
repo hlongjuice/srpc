@@ -1,23 +1,32 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\CoopDivision;
 
-use App\Models\Student;
+use App\Models\Document;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
-class StudentController extends Controller
+class DocumentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function home($division){
+//        echo  $division;
+        $documents=Document::where('division_id',$division)->get();
+
+        return view('coop_division.documents.index')->with('documents',$documents);
+    }
+    public function index($division)
     {
-        $students = Student::all();
-        return view('coop_division.students.index')->with('students',$students);
+        echo $division;
+
+//        $documents=Document::all();
+//        return view('coop_division.documents.index')->with('documents',$documents);
     }
 
     /**
@@ -25,9 +34,14 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function addNewFile($division){
+
+        return view('coop_division.documents.add_file')->with('division',$division);
+    }
     public function create()
     {
-        return view('coop_division.students.add_student');
+
+        return view('coop_division.documents.add_file');
     }
 
     /**
@@ -38,9 +52,14 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $students=$request->all();
-        Student::create($students);
-        return redirect('students');
+        $document=new Document();
+        $file_name=$request->file('document')->getClientOriginalName();
+        $request->file('document')->move('documents',$file_name);
+        $file_path='documents/'.$file_name;
+        $document->file_path=$file_path;
+        $document->title=$request->get('title');
+        $document->division_id=$request->get('division');
+        $document->save();
     }
 
     /**
@@ -62,8 +81,7 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $student=Student::findOrNew($id);
-        return view('coop_division.students.edit')->with('student',$student);
+        //
     }
 
     /**
@@ -86,8 +104,6 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        Student::destroy($id);
-       return redirect('students');
         //
     }
 }

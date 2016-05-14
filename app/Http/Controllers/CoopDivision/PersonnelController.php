@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\CoopDivision;
 
 use App\Models\Division;
 use App\Models\Duty;
 use App\Models\Personnel;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
 class PersonnelController extends Controller
@@ -16,35 +17,33 @@ class PersonnelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function home($id)
     {
-        //Get The Specific division
-        $division=Division::where('title','=','planA')->first();
-        foreach($division->personnel as $person)
-        {
-            echo $person;
-            echo $person->pivot->duty_id;
-            echo Duty::find($person->pivot->duty_id)->first()->title;
-            echo $person->name.'<br>';
-           // echo $person->personnel;
-//            echo $person->name;
-//            echo $person->duties()->wherePivot('division_id','=','2')->first()->title.'<br>';
-        }
-        //Send All personnel in the specific division
-       // return view('coop_division.personnel.index')->with('personnel',$division->personnel);
+        $division=Division::where('id',$id)->first();
+        return view('coop_division.personnel.index')->with('personnel',$division->personnel);
     }
 
+    public function index()
+    {
+        echo 'Index!!!';
+
+    }
+    public function addPersonnel(){
+//        echo 'Yo!!';
+        $divisions=Division::all('id','title'); //Get all divisions
+//
+        foreach($divisions as $division){ // Set Associative Array Before Send To Form
+            $arr_division[$division->id]=$division->title; // $arr_division["KEY"]="Values"
+        }
+//        print_r($arr_division);
+        unset($arr_division[1]); // Delete first element from division
+        return view('coop_division.personnel.add_personnel')->with('division',$arr_division);
+    }
 
     /*Create Personnel*/
     public function create()
     {
-        $divisions=Division::all('id','title'); //Get all divisions
-
-        foreach($divisions as $division){ // Set Associative Array Before Send To Form
-            $arr_division[$division->id]=$division->title; // $arr_division["KEY"]="Values"
-        }
-        unset($arr_division[1]); // Delete first element from division
-        return view('coop_division.personnel.add_personnel')->with('division',$arr_division);
+//        return view('coop_division.documents.index');
     }
 
     /*Add New Personnel*/
@@ -55,9 +54,11 @@ class PersonnelController extends Controller
         $person->name=$request->get('name');
         $person->lastname=$request->get('lastname');
         //Upload image
-        $path='images/'.$request->file('image')->getClientOriginalName();//Get path and file name
-        Image::make($request->file('image')->getRealPath())->resize(200,200)->save($path);//Upload image to directory
-        $person->image=$path;//set image path
+        if($request->hasfile('image')) {
+            $path = 'images/' . $request->file('image')->getClientOriginalName();//Get path and file name
+            Image::make($request->file('image')->getRealPath())->resize(200, 200)->save($path);//Upload image to directory
+            $person->image = $path;//set image path
+        }
         $person->save();
 
         //Select Division from user's input
@@ -65,7 +66,7 @@ class PersonnelController extends Controller
 
         //Add New Personnel and set his/her division
         $division->personnel()->attach($person->id,['duty_id'=>$request->get('duty')]);
-        return redirect('personnel');;
+        return redirect('personnel');
     }
 
     public function show($id)

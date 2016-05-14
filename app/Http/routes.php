@@ -11,51 +11,31 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/home', function () {
-    return view('home');
-});
 
-Route::get('/create_order',['as'=>'create_order', function ()
-{
-    return view('create_order');
-}]);
-Route::post('/create_order','CreateOrderController@store');
-//Route::get('/product','ProductController@show');
-//Route::post('/product','ProductController@store');
-//Route::get('/add_product',function()
-//{
-//    return view('add-product');
-//});
-Route::get('/add_product','ProductController@create');
 
-Route::resource('personnel','PersonnelController');
-Route::resource('products','ProductController');
-//Student
-Route::resource('students','StudentController');
-Route::get('/about',function()
-{
-    $name='<span style="color:green">Hlong</span>';
-    return view('about')->with('name',$name);
+
+//Document
+Route::group(['prefix'=>'coop_division'],function(){
+
+    /*Personnel*/
+    Route::get('personnel/add_personnel','CoopDivision\PersonnelController@addPersonnel')->name('coop_division.personnel.add_new_personnel');
+    Route::get('personnel/{id}','CoopDivision\PersonnelController@home')->name('coop_division.personnel.home');
+    Route::resource('personnel','CoopDivision\PersonnelController');
+
+    Route::get('documents/{division}','CoopDivision\DocumentController@home')->name('coop_division.documents.home');
+    Route::get('documnets/add_newfile/{division}','CoopDivision\DocumentController@addNewFile')->name('coop_division.documents.add_new_file');
+    Route::resource('documents','CoopDivision\DocumentController');
+
 });
 
 
 
-Route::get('/order','CreateOrderController@index');
-Route::get('/order/{id}','CreateOrderController@show');
 
-Route::get('/coop_division',function(){
-   return view('coop_division.index');
-});
-Route::get('/test2',function(){
-    return view('coop_division.test2');
-});
-Route::get('/student',function(){
-   return view('coop_division.student');
-});
+
+
+
+
 
 
 /*
