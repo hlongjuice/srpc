@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Personnel extends Model
 {
-    protected $fillable=['name','lastname'];
+    protected $fillable=['name','lastname','department','rank','image'];
     protected $table='personnel';
 
     public function divisions(){
@@ -16,5 +16,9 @@ class Personnel extends Model
     public function duties(){
         //Return Duty Model and Pivot Table with duty_id division_id and personnel_id
         return $this->belongsToMany('App\Models\Duty','division_duty_personnel')->withPivot('division_id');
+    }
+
+    public function departments(){
+        return $this->belongsTo('App\Models\Department');
     }
 }

@@ -38,10 +38,22 @@
                     {{Form::text('lastname',null,array('class'=>'form-control','placeholder'=>'นามสกุล'))}}
             </div>
 
-            {{--Level--}}
+            {{--Rank--}}
             <div class="col-xs-6 col-md-4 form-group">
                 {{Form::label('rank','ตำแหน่ง')}}
                     {{Form::text('level',null,array('class'=>'form-control','placeholder'=>''))}}
+            </div>
+
+            {{--Department--}}
+            <div class="col-xs-12 col-md-4 form-group">
+                {{Form::label('department','แผนก')}}
+                {{Form::select('department',$departments,null,array('class'=>'form-control'))}}
+            </div>
+
+            {{--Image--}}
+            <div class="col-xs-12 col-md-4 form-group">
+                {{Form::label('image','รูป')}}
+                {{Form::file('image')}}
             </div>
 
             {{--Duty--}}
@@ -60,34 +72,14 @@
             {{--Division--}}
             <div class="col-xs-6 col-md-4 form-group">
                 {{Form::label('division',' แผนก')}}
-                {{Form::select('division',$division,null,array('class'=>'form-control'))}}
+                {{Form::select('division',$divisions,null,array('class'=>'form-control'))}}
             </div>
 
-            {{--Address--}}
-            <div class="col-xs-12 col-md-8 form-group">
-                {{Form::label('address','ที่อยู่')}}
-                {{Form::textarea('address',null,array('class'=>'form-control','rows'=>'10'))}}
-            </div>
-
+            {{--Submit--}}
             <div class="col-xs-12 col-md-4 form-group">
-                {{--Phone--}}
-                <div class="form-group">
-                    {{Form::label('phone','เบอร์โทร')}}
-                    {{Form::text('phone',null,array('class'=>'form-control','placeholder'=>'ตัวอย่าง 081-2345678'))}}
-                </div>
-
-                {{--Image--}}
-                <div class="form-group">
-                    {{Form::label('image','รูป')}}
-                    {{Form::file('image')}}
-                </div>
-
-                {{--Submit--}}
-                <div class="form-group">
-                  {{Form::submit('บันทึก',array('class'=>'btn btn-success btn-block'))}}
-                </div>
-
+              {{Form::submit('บันทึก',array('class'=>'btn btn-success btn-block'))}}
             </div>
+
 
             {{Form::close()}}
         </div>

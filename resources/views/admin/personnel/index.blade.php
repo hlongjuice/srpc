@@ -8,7 +8,7 @@
         <div class="panel-body">
             <div class="row" id="add-personnel-btn">
                 <div class="col-xs-6 col-md-4">
-                    <a class="btn btn-default" href={{route('coop_division.personnel.add_new_personnel')}}>เพิ่มบุคคลากร</a>
+                    <a class="btn btn-default" href={{route('admin.personnel.create')}}>เพิ่มบุคคลากร</a>
                 </div>
             </div>
             <div class="row">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Department;
 use App\Models\Division;
 use App\Models\Duty;
 use App\Models\Personnel;
@@ -17,33 +18,27 @@ class PersonnelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function home($id)
-    {
-        $division=Division::where('id',$id)->first();
-        return view('admin.personnel.index')->with('personnel',$division->personnel);
-    }
-
     public function index()
     {
         $personnel=Personnel::with('divisions')->get();
-        echo $personnel;
-    }
-    public function addPersonnel(){
-//        echo 'Yo!!';
-        $divisions=Division::all('id','title'); //Get all divisions
-//
-        foreach($divisions as $division){ // Set Associative Array Before Send To Form
-            $arr_division[$division->id]=$division->title; // $arr_division["KEY"]="Values"
-        }
-//        print_r($arr_division);
-        unset($arr_division[1]); // Delete first element from division
-        return view('admin.personnel.add_personnel')->with('division',$arr_division);
+        return view('admin.personnel.index')->with('personnel',$personnel);
     }
 
     /*Create Personnel*/
     public function create()
     {
-//        return view('admin.documents.index');
+        $divisions=Division::all('id','title'); //Get all divisions
+        foreach($divisions as $division){ // Set Associative Array Before Send To Form
+            $arr_division[$division->id]=$division->title; // $arr_division["KEY"]="Values"
+        }
+        unset($arr_division[1]); // Delete first element from division
+
+        $departments=Department::all('id','title');//Get All department
+        foreach($departments as $department)
+        {
+            $arr_department[$department->id]=$department->title;
+        }
+        return view('admin.personnel.add_personnel')->with(['divisions'=>$arr_division,'departments'=>$arr_department]);
     }
 
     /*Add New Personnel*/

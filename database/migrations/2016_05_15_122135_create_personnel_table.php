@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDocumentsTable extends Migration
+class CreatePersonnelTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,9 @@ class CreateDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::table('documents', function (Blueprint $table) {
-            //
+        Schema::table('personnel', function (Blueprint $table) {
+            $table->dropColumn('department');
+            $table->integer('department_id');
         });
     }
 
@@ -24,8 +25,8 @@ class CreateDocumentsTable extends Migration
      */
     public function down()
     {
-        Schema::table('documents', function (Blueprint $table) {
-            $table->string('title2');
+        Schema::table('personnel', function (Blueprint $table) {
+            //
         });
     }
 }
