@@ -68,6 +68,10 @@
     <orderEntry type="module-library">
       <library name="PHP">
         <CLASSES>
+          <root url="file://$MODULE_DIR$/vendor/.git/hooks" />
+          <root url="file://$MODULE_DIR$/vendor/.git/info" />
+          <root url="file://$MODULE_DIR$/vendor/.git/objects" />
+          <root url="file://$MODULE_DIR$/vendor/.git/refs" />
           <root url="file://$MODULE_DIR$/vendor/barryvdh/laravel-ide-helper" />
           <root url="file://$MODULE_DIR$/vendor/classpreloader/classpreloader" />
           <root url="file://$MODULE_DIR$/vendor/composer" />
@@ -130,6 +134,10 @@
           <root url="file://$MODULE_DIR$/vendor/vlucas/phpdotenv" />
         </CLASSES>
         <SOURCES>
+          <root url="file://$MODULE_DIR$/vendor/.git/hooks" />
+          <root url="file://$MODULE_DIR$/vendor/.git/info" />
+          <root url="file://$MODULE_DIR$/vendor/.git/objects" />
+          <root url="file://$MODULE_DIR$/vendor/.git/refs" />
           <root url="file://$MODULE_DIR$/vendor/barryvdh/laravel-ide-helper" />
           <root url="file://$MODULE_DIR$/vendor/classpreloader/classpreloader" />
           <root url="file://$MODULE_DIR$/vendor/composer" />

@@ -1,13 +1,17 @@
-@extends('layouts.master')
+@extends('layouts.app')
+
 @section('content')
-	<div class="col-xs-6">
-	  <h1>Mymoney</h1>
-	</div>
-	<div class="col-xs-12 col-md-12">
-		<a href="../public/form"><button type="button" class="btn btn-default btn-lg btn-block">เพิ่มข้อมูล</button></a>
-		<button type="button" class="btn btn-default btn-lg btn-block">ดูข้อมูลทั้งหมด</button>
-		<button type="button" class="btn btn-default btn-lg btn-block">ค้นหา</button>
-	</div>
-  
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">Dashboard</div>
+
+                <div class="panel-body">
+                    You are logged in!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
- 

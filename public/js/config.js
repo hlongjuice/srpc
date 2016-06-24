@@ -35,4 +35,13 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
+	config.extraPlugins = 'uploadimage';
+	config.uploadUrl = '/uploader/upload.php';
+
+	config.filebrowserBrowseUrl = '../../js/kcfinder/browse.php?opener=ckeditor&type=files';
+	config.filebrowserImageBrowseUrl = '../../js/kcfinder/browse.php?opener=ckeditor&type=images';
+	config.filebrowserFlashBrowseUrl = '../../js/kcfinder/browse.php?opener=ckeditor&type=flash';
+	config.filebrowserUploadUrl = '../../js/kcfinder/upload.php?opener=ckeditor&type=files';
+	config.filebrowserImageUploadUrl = '../../js/kcfinder/upload.php?opener=ckeditor&type=images';
+	config.filebrowserFlashUploadUrl = '../../js/kcfinder/upload.php?opener=ckeditor&type=flash';
 };

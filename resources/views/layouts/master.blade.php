@@ -20,9 +20,11 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 	<script src="{{ asset('js/jquery-1.11.3.min.js')}}"></script>
+	  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.19/jquery.form-validator.min.js"></script>
 	  <script src="{{asset('js/bootstrap.min.js')}}"></script>
 	  <script src="{{ asset('js/jquery-ui.min.js')}}"></script>
 	  <script src="{{asset('js/ckeditor.js')}}"></script>
+
 	  @yield('script')
 	</head>
 	<body>
@@ -38,6 +40,20 @@
 
 			  {{--Side Menu--}}
 			  <div class="col-md-3 col-md-pull-9">
+					  @if(Auth::check())
+					  <div class="panel panel-default">
+						  <div class="panel-heading">Admin</div>
+						  <div class="panel-body">
+							  <div class="col-xs-12">
+								  {{Auth::user()->name}}
+							  </div>
+							  <div class="col-xs-12">
+								  <a class="btn btn-danger" href={{url('/logout')}}>ออกจากระบบ</a>
+							  </div>
+
+						  </div>
+					  </div>
+					  @endif
 				  @yield('sidemenu')
 			  </div>
 

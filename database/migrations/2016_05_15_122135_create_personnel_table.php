@@ -13,7 +13,7 @@ class CreatePersonnelTable extends Migration
     public function up()
     {
         Schema::table('personnel', function (Blueprint $table) {
-            $table->dropColumn('department');
+            $table->dropColumn('address');
             $table->integer('department_id');
         });
     }

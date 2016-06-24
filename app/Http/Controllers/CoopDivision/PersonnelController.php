@@ -17,6 +17,11 @@ class PersonnelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+//        $this->middleware('auth');
+    }
+
     public function home($id)
     {
         $division=Division::where('id',$id)->first();
@@ -25,7 +30,7 @@ class PersonnelController extends Controller
 
     public function index()
     {
-        echo 'Index!!!';
+        return view('coop_division.index');
 
     }
     public function addPersonnel(){

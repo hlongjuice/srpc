@@ -7,7 +7,7 @@
             <h4>Admin</h4>
         </div>
         <div class="panel-body">
-            <div class="col-xs-4">
+            <div class="col-xs-3">
                 <div class="thumbnail">
                     <img style="width: 100%" src="http://placehold.it/50x50">
                     <div class="caption text-center">
@@ -15,19 +15,27 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-3">
                 <div class="thumbnail">
                     <img style="width: 100%" src="http://placehold.it/50x50">
                     <div class="caption text-center">
-                        <h4>Personnel</h4>
+                        <h4><a href={{route('admin.documents.index')}}>Document</a></h4>
                     </div>
                 </div>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-3">
                 <div class="thumbnail">
                     <img style="width: 100%" src="http://placehold.it/50x50">
                     <div class="caption text-center">
-                        <h4>Personnel</h4>
+                        <h4><a href={{route('admin.contents.index')}}>Content</a></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="thumbnail">
+                    <img style="width: 100%" src="http://placehold.it/50x50">
+                    <div class="caption text-center">
+                        <h4><a href={{route('admin.categories.index')}}>Content Categories</a></h4>
                     </div>
                 </div>
             </div>

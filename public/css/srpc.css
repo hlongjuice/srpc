@@ -7,3 +7,9 @@
 .srpc-list a{
 	color:#777;
 }
+.error{
+	color:red;
+}
+.element-hide{
+	display:none;
+}

@@ -12,6 +12,7 @@ class Duty extends Model
         return $this->belongsToMany('App\Models\Personnel','division_duty_personnel')->withPivot('division_id');
     }
     public function divisions(){
-        return $this->belongsToMany('App\Models\Division','division_duty_personnel')->withPivot('personnel_id');
+        return $this->belongsToMany('App\Models\Division','division_duty_personnel')
+            ->withPivot('personnel_id');
     }
 }

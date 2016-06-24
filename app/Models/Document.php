@@ -9,6 +9,6 @@ class Document extends Model
     protected $fillable=['title','file_path','division_id'];
 
     public function divisions(){
-        return $this->belongsTo('App\Models\Division');
+        return $this->belongsTo('App\Models\Division','division_id');
     }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use Illuminate\Http\Request;
+use App\Models\User;
 use Validator;
+use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -28,7 +30,9 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = 'admin';
+
+    protected $redirectAfterLogout = 'login';
 
     /**
      * Create a new authentication controller instance.
@@ -69,4 +73,7 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
 }
+
+

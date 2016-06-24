@@ -11,42 +11,24 @@
 |
 */
 
+Route::group(['prefix'=>'coop_division'],function(){
+    /*Content*/
+    /*Personnel*/
+    Route::get('personnel/add_personnel','CoopDivision\PersonnelController@addPersonnel')->name('coop_division.personnel.add_new_personnel');
+    Route::get('personnel/{id}','CoopDivision\PersonnelController@home')->name('coop_division.personnel.home');
+
+
+    /*Document*/
+    Route::get('documents/{division}','CoopDivision\DocumentController@home')->name('coop_division.documents.home');
+    Route::resource('documents','CoopDivision\DocumentController');
+});
+
 
 
 /*Admin*/
-    Route::get('admin',function(){
-       return view('admin.index');
-    });
-Route::group(['prefix'=>'admin'],function(){
-    Route::resource('personnel','Admin\PersonnelController');
-});
-/*Coop_Division*/
-    Route::get('coop_division',function(){
-        return view('coop_division.index');
-    });
-    Route::group(['prefix'=>'coop_division'],function(){
-
-        /*Content*/
-        /*Personnel*/
-        Route::get('personnel/add_personnel','CoopDivision\PersonnelController@addPersonnel')->name('coop_division.personnel.add_new_personnel');
-        Route::get('personnel/{id}','CoopDivision\PersonnelController@home')->name('coop_division.personnel.home');
-        Route::resource('personnel','CoopDivision\PersonnelController');
-
-        /*Document*/
-        Route::get('documents/{division}','CoopDivision\DocumentController@home')->name('coop_division.documents.home');
-//        Route::get('documnets/add_newfile/{division}','CoopDivision\DocumentController@addNewFile')->name('coop_division.documents.add_new_file');
-        Route::resource('documents','CoopDivision\DocumentController');
-    });
-
-
-
-
-
-
-
-
-
-
+// Route::group(['middleware'=>'guest'],function(){
+//    Route::get('admin/tt','Admin\PersonnelController@dashBoard');
+//});
 
 
 /*
@@ -60,6 +42,49 @@ Route::group(['prefix'=>'admin'],function(){
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
+//Route::group(['middleware' => ['web']], function () {
+
+//});
+
+
+Route::group(['middleware'=>'web'],function(){
+
+    Route::auth();
+
+    Route::group(['prefix'=>'admin'],function(){
+
+        /*Personnel*/
+        Route::get('personnel_delete_division','Admin\PersonnelController@deleteDivision');
+        Route::post('personnel_delete','Admin\PersonnelController@deletePersonnel');
+        Route::get('divisions','Admin\PersonnelController@getDivisions');
+        Route::resource('personnel','Admin\PersonnelController');
+
+        /*Document*/
+        Route::get('delete_document','Admin\DocumentController@deleteDocument');
+        Route::resource('documents','Admin\DocumentController');
+
+        /*Content Categories*/
+        Route::resource('categories','Admin\CategoryController');
+
+        /*Contents*/
+        Route::resource('contents','Admin\ContentController');
+
+
+
+    });
+
+    Route::get('/home', 'HomeController@index');
+    Route::get('admin','Admin\PersonnelController@dashBoard');
+
+    /*Coop_Division*/
+    Route::get('coop_division',function(){
+        return view('coop_division.index');
+    });
+    Route::resource('coop_division/personnel','CoopDivision\PersonnelController');
+
+
+    Route::get('js/kcfinder/',function(){
+       return view('login');
+    });
+
 });
