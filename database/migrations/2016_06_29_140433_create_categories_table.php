@@ -15,12 +15,15 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('parent_id');
+            $table->integer('lft');
+            $table->integer('rgt');
             $table->integer('level');
             $table->string('title');
             $table->mediumText('description');
             $table->dateTime('published');
             $table->integer('access');
             $table->timestamps();
+
         });
     }
 
@@ -31,6 +34,8 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('categories');
+        Schema::create('categories', function (Blueprint $table) {
+            //
+        });
     }
 }

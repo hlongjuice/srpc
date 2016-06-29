@@ -149,6 +149,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Baum\Providers\BaumServiceProvider::class,
+
 
         /*
          * Application Service Providers...

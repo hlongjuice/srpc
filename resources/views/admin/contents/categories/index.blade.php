@@ -24,15 +24,7 @@
                                 <td>{{$row}}</td>
                                 <td>
                                     <ul>
-                                       <li>
-                                           {{$category->title}}
-                                           <ul>
-                                           @foreach($category->child as $child)
-                                 -<li>{{$child->title}}</li>
-                                               @endforeach
-                                                   </ul>
-                                       </li>
-
+                                        <?php echo renderNode($category)?>
                                     </ul>
 
                                 </td>
@@ -47,3 +39,25 @@
         </div>
     </div>
     @endsection
+
+
+<?php
+function renderNode($node) {
+    if( $node->isLeaf() ) {
+        return '<li>' . $node->title . '</li>';
+    } else {
+        $html = '<li>' . $node->title;
+
+        $html .= '<ul>';
+
+        foreach($node->children as $child)
+            $html .= renderNode($child);
+
+        $html .= '</ul>';
+
+        $html .= '</li>';
+    }
+
+    return $html;
+}
+?>

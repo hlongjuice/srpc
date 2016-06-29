@@ -45,12 +45,22 @@ class ContentController extends Controller
      */
     public function create()
     {
-        $categories=Category::all('id','title'); //Get all categories
-        foreach($categories as $category){ // Set Associative Array Before Send To Form
-            $arr_category[$category->id]=$category->title; // $arr_category["KEY"]="Values"
-        }
-        unset($arr_category[1]); // Delete first element from category
-        $arr_category=[''=>'กรุณาเลือกหมวดหมู่']+$arr_category;
+        $text='';
+        $root_cat = Category::root();//get root category
+        foreach($root_cat->getDescendants() as $child_cat) //get child category
+        {
+            for($i=0;$i<$child_cat->getLevel();$i++)//check level
+            {
+                $text.='-';//add '-' before text per level of category
+            }
+            if($child_cat->getLevel()==1)
+                $arr_category[$child_cat->id]=$text.$child_cat->title;
+            else
+                $arr_category[$child_cat->id]=$text.' '.$child_cat->title; // $arr_category["KEY"]="Values"
+            $text='';
+        };
+
+        $arr_category=[' '=>'เลือกหมวดหมู่']+$arr_category;
 //
         return view('admin.contents.add_contents')->with('categories',$arr_category);
     }

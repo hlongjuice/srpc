@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\TestNested;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
-class CategoryController extends Controller
+class TestNestedController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,23 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //$categories=Category::all();
-        $categories=Category::all()->toHierarchy();
-        return view('admin.contents.categories.index')->with('categories',$categories);
+        $html='';
+        $nested=TestNested::root();
+        $root=Category::root();
+//        echo $root;
+        $root->children()->create(['title'=>'ฝ่ายแผนงานและความร่วมมิอ']);
+//        echo $nested->getDescendantsAndSelf();
+//        foreach($nested->getDescendantsAndSelf() as $child){
+//            for($i=0;$i<$child->getLevel();$i++){
+//                $html.='-';
+//            }
+//            echo $html.$child->title;
+//            echo' Level is '.$child->getLevel().'<br>';
+//            $html='';
+//        }
+
+
+
     }
 
     /**
@@ -29,23 +43,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $text='';
-        $root_cat = Category::root();//get root category
-        foreach($root_cat->getDescendants() as $child_cat) //get child category
-        {
-            for($i=0;$i<$child_cat->getLevel();$i++)//check level
-            {
-                $text.='-';//add '-' before text per level of category
-            }
-            if($child_cat->getLevel()==1)
-                $arr_category[$child_cat->id]=$text.$child_cat->title;
-            else
-                $arr_category[$child_cat->id]=$text.' '.$child_cat->title; // $arr_category["KEY"]="Values"
-            $text='';
-        };
-
-        $arr_category=['1'=>'เป็นหมวดหมู่กลัก']+$arr_category;
-        return view('admin.contents.categories.add_categories')->with('categories',$arr_category);
+//        $root =Testnested::create(['title'=>'root']);
     }
 
     /**
@@ -56,10 +54,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $parent=Category::where('id',$request->input('parent_id'))->first();
-        $parent->children()->create(['title'=>$request->input('title')]);
-        return redirect()->route('admin.categories.index');
-
+        //
     }
 
     /**

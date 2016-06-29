@@ -11,6 +11,7 @@
 |
 */
 
+Route::resource('testnested','TestNestedController');
 Route::group(['prefix'=>'coop_division'],function(){
     /*Content*/
     /*Personnel*/
